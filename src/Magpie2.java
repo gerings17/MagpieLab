@@ -58,7 +58,7 @@ public class Magpie2
 		else if(statement.indexOf("Mr.")>=0){
 			response = "He sounds like a good teacher.";
 		}
-		else if(statement.indexOf("movie")>=0){
+		else if(statement.indexOf("movies")>=0){
 			response="My favorite movie is The Breakfast Club. What is your favorite movie?";
 		}
 		else if(statement.indexOf("music")>=0){
