@@ -54,7 +54,7 @@ public class Magpie3
 		else if(findKeyword(statement, "Hi")>=0
 				|| findKeyword(statement, "Hello")>=0)
 				{
-					response = "Hi! What would you like to talk about?";
+					response = "What would you like to talk about?";
 				}
 		else if(findKeyword(statement, "Mr.")>=0
 				||findKeyword(statement, "Mrs.")>=0
@@ -77,6 +77,15 @@ public class Magpie3
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
 			response = transformIWantToStatement(statement);
+		}
+		else if(findKeyword(statement, "I like")>=0){
+			response = transformILikeStatement(statement);
+		}
+		else if(findKeyword(statement, "because")>=0){
+			response = "That seems like a good reason!";
+		}
+		else if(findKeyword(statement, "My favorite")>=0){
+			response = transformMyFavoriteStatement(statement);
 		}
 
 		else
@@ -145,6 +154,28 @@ public class Magpie3
 		
 		String restOfStatement = statement.substring(psnOfYou + 3, psnOfMe).trim();
 		return "What makes you think that I " + restOfStatement + " you?";
+	}
+	private String transformILikeStatement(String statement){
+		statement = statement.trim();
+		String lastChar = statement.substring(statement.length()-1);
+		if(lastChar.equals(".")||lastChar.equals("!")){
+			statement = statement.substring(0, statement.length()-1);
+		}
+		int psnOfLike = findKeyword(statement, "like");
+		String restOfStatement = statement.substring(psnOfLike+4,statement.length()).trim();
+		return "Why do you like " + restOfStatement + "?";
+	}
+	private String transformMyFavoriteStatement(String statement){
+		statement = statement.trim();
+		String lastChar = statement.substring(statement.length()-1);
+		if(lastChar.equals(".")||lastChar.equals("!")){
+			statement = statement.substring(0, statement.length()-1);
+		}
+		int psnOfIs = findKeyword(statement, "is");
+		int psnOfFav = findKeyword(statement, "favorite");
+		String SubjectOfStatement = statement.substring(psnOfIs+2, statement.length()).trim();
+		String TopicOfStatement = statement.substring(psnOfFav+8, psnOfIs-1).trim();
+		return "Why is " +SubjectOfStatement + " your favorite "+ TopicOfStatement + "?";
 	}
 	
 
